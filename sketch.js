@@ -212,8 +212,91 @@ function loadKeywords() {
 
 function buildKeywordGrid() {
 
+  console.log(
+  "portrait?",
+  height > width
+);
+  
   if (!calligraphy) return;
 
+if (height > width) {
+
+  let gap = 30;
+
+  keywordCells = [
+
+    // TOP LEFT
+
+    {
+      x: MARGIN,
+      y: MARGIN,
+      w:
+        width / 2 -
+        MARGIN -
+        gap,
+
+      h:
+        height * 0.25
+    },
+
+    // TOP RIGHT
+
+    {
+      x:
+        width / 2 +
+        gap,
+
+      y: MARGIN,
+
+      w:
+        width / 2 -
+        MARGIN -
+        gap,
+
+      h:
+        height * 0.25
+    },
+
+    // BOTTOM LEFT
+
+    {
+      x: MARGIN,
+
+      y:
+        height * 0.75,
+
+      w:
+        width / 2 -
+        MARGIN -
+        gap,
+
+      h:
+        height * 0.15
+    },
+
+    // BOTTOM RIGHT
+
+    {
+      x:
+        width / 2 +
+        gap,
+
+      y:
+        height * 0.75,
+
+      w:
+        width / 2 -
+        MARGIN -
+        gap,
+
+      h:
+        height * 0.15
+    }
+
+  ];
+
+  return;
+}  
   let scaleFactor =
     min(
       width / calligraphy.width,
@@ -240,9 +323,63 @@ function buildKeywordGrid() {
   let bottom =
     height / 2 + ch / 2;
 
+  if (height > width) {
+
+  // ===========================
+  // PORTRAIT GRID
+  // ===========================
+
+  let padding = 120;
+
   keywordCells = [
 
-    // 1
+    // TOP
+
+    {
+      x: MARGIN,
+      y: MARGIN,
+      w: width - MARGIN * 2,
+      h: top - padding - MARGIN
+    },
+
+    // LEFT MIDDLE
+
+    {
+      x: MARGIN,
+      y: top - 40,
+      w: left - MARGIN - 40,
+      h: ch + 80
+    },
+
+    // RIGHT MIDDLE
+
+    {
+      x: right + 40,
+      y: top - 40,
+      w: width - right - MARGIN - 40,
+      h: ch + 80
+    },
+
+    // BOTTOM
+
+    {
+      x: MARGIN,
+      y: bottom + padding,
+      w: width - MARGIN * 2,
+      h: height - bottom - padding - MARGIN
+    }
+
+  ];
+
+}
+else {
+
+  // ===========================
+  // LANDSCAPE GRID
+  // ===========================
+
+  keywordCells = [
+
     {
       x: MARGIN,
       y: MARGIN,
@@ -250,7 +387,6 @@ function buildKeywordGrid() {
       h: top - MARGIN
     },
 
-    // 2
     {
       x: left,
       y: MARGIN,
@@ -258,7 +394,6 @@ function buildKeywordGrid() {
       h: top - MARGIN
     },
 
-    // 3
     {
       x: right,
       y: MARGIN,
@@ -266,7 +401,6 @@ function buildKeywordGrid() {
       h: top - MARGIN
     },
 
-    // 4
     {
       x: MARGIN,
       y: top,
@@ -274,7 +408,6 @@ function buildKeywordGrid() {
       h: ch
     },
 
-    // 6
     {
       x: right,
       y: top,
@@ -282,7 +415,6 @@ function buildKeywordGrid() {
       h: ch
     },
 
-    // 7
     {
       x: MARGIN,
       y: bottom,
@@ -290,7 +422,6 @@ function buildKeywordGrid() {
       h: height - bottom - MARGIN
     },
 
-    // 8
     {
       x: left,
       y: bottom,
@@ -298,7 +429,6 @@ function buildKeywordGrid() {
       h: height - bottom - MARGIN
     },
 
-    // 9
     {
       x: right,
       y: bottom,
@@ -307,6 +437,7 @@ function buildKeywordGrid() {
     }
 
   ];
+}
 }
 
 function detectLanguage(word) {
